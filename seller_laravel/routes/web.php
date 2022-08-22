@@ -41,7 +41,5 @@ Route::group(['middleware' => ['auth', 'roles'], ['roles' => ['Seller']]], funct
 
     //My Profile
     Route::get('/profile', [App\Http\Controllers\User\UserController::class, 'myProfile'])->name('myProfile');
-    //Change Password
-    Route::get('/change-password', [App\Http\Controllers\User\UserController::class, 'changePassword'])->name('changePassword');
 });
 
