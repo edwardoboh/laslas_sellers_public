@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="234ca831-689b-456e-bad9-1370e71218ee" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="ProjectId" id="1yaCrBWa0VrxCdlyorrcCjLQMuk" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/SYSTEMTECH PROJECTS/smarta_hotel_management" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mgbem\Downloads\demo1-20210917T122152Z-001\demo1\dist\assets\plugins\global\font" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mgbem\Downloads\demo1-20210917T122152Z-001\demo1\dist\assets\plugins\global\fonts" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="234ca831-689b-456e-bad9-1370e71218ee" name="Default Changelist" comment="" />
+      <created>1632480511689</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1632480511689</updated>
+      <workItem from="1632480512880" duration="27762000" />
+      <workItem from="1632601866312" duration="14435000" />
+      <workItem from="1633034732449" duration="7782000" />
+      <workItem from="1633334317714" duration="271000" />
+      <workItem from="1634037420942" duration="5713000" />
+      <workItem from="1634125635701" duration="7211000" />
+      <workItem from="1634161594297" duration="325000" />
+      <workItem from="1634163322540" duration="5000" />
+      <workItem from="1634165822969" duration="4805000" />
+      <workItem from="1634203787253" duration="3084000" />
+      <workItem from="1634642426944" duration="3171000" />
+      <workItem from="1635349435179" duration="647000" />
+      <workItem from="1637327766831" duration="5573000" />
+      <workItem from="1637759428952" duration="674000" />
+      <workItem from="1639949270997" duration="1517000" />
+      <workItem from="1640012384438" duration="619000" />
+      <workItem from="1640037527578" duration="1540000" />
+      <workItem from="1640085342809" duration="210000" />
+      <workItem from="1642161180676" duration="1304000" />
+      <workItem from="1642407008469" duration="666000" />
+      <workItem from="1642492395833" duration="1840000" />
+      <workItem from="1642514037454" duration="952000" />
+      <workItem from="1643367631956" duration="1691000" />
+      <workItem from="1644312857602" duration="762000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="740" y="271" key="FileChooserDialogImpl" timestamp="1642499007418">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="740" y="271" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1642499007418" />
+    <state x="667" y="249" width="585" height="534" key="find.popup" timestamp="1642514938633">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="667" y="249" width="585" height="534" key="find.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1642514938633" />
+  </component>
+</project>
