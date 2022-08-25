@@ -34,12 +34,12 @@ Route::group(['middleware' => ['guest']], function () {
     Route::post('/register', [\App\Http\Controllers\Authentication\AuthenticationController::class, 'registerStore'])->name('registerStore');
 });
 
-Route::group(['middleware' => ['auth', 'roles'], ['roles' => ['Seller']]], function (){
+Route::group(['middleware' => ['auth', 'roles'], ['roles' => ['Seller']]], function () {
     //Dashboard
     Route::get('/', [App\Http\Controllers\Dasboard\DasboardController::class, 'index'])->name('home');
     Route::get('/dashboard', [App\Http\Controllers\Dasboard\DasboardController::class, 'index'])->name('dashboard');
 
     //My Profile
-    Route::get('/profile', [App\Http\Controllers\User\UserController::class, 'myProfile'])->name('myProfile');
+    Route::get('/profile/{page?}', [App\Http\Controllers\User\UserController::class, 'myProfile'])->name('myProfile');
+    Route::post('/profile/update', [App\Http\Controllers\User\UserController::class, 'updateProfile'])->name('updateProfile');
 });
-
