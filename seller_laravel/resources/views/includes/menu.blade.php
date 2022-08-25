@@ -39,13 +39,13 @@
                         </a>
                     </li>
                     <li class="menu-item " aria-haspopup="true">
-                        <a href="/profile/password" class="menu-link ">
+                        <a href="" class="menu-link ">
                             <i class="menu-bullet menu-bullet-line"><span></span></i>
                             <span class="menu-text">{{ __('messages.change_password') }}</span>
                         </a>
                     </li>
                     <li class="menu-item " aria-haspopup="true">
-                        <a href="/profile/email" class="menu-link ">
+                        <a href="" class="menu-link ">
                             <i class="menu-bullet menu-bullet-line"><span></span></i>
                             <span class="menu-text">{{ __('messages.notification_settings') }}</span>
                         </a>

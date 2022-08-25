@@ -16,7 +16,7 @@
 
         <!--begin::Form group-->
         <div class="form-group">
-            <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
+            <label class="font-size-h6 font-weight-bolder text-dark">{{ trans_choice('words.email', 1) }}</label>
             <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" type="text" id="email" name="email" autocomplete="off"/>
         </div>
         <!--end::Form group-->

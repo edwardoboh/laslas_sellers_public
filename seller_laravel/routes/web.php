@@ -24,7 +24,6 @@ Route::group(['middleware' => ['guest']], function () {
     Route::get('/login', [\App\Http\Controllers\Authentication\AuthenticationController::class, 'login'])->name('login');
     Route::get('/signin', [\App\Http\Controllers\Authentication\AuthenticationController::class, 'signIn'])->name('signIn');
     //Onetime Login
-    Route::post('/reset-password-onetime-login', [\App\Http\Controllers\Authentication\AuthenticationController::class, 'resetPasswordOnetimeLogin'])->name('resetPasswordOnetimeLogin');
     Route::post('/verify-onetime-login', [\App\Http\Controllers\Authentication\AuthenticationController::class, 'verifyOnetimeLogin'])->name('verifyOnetimeLogin');
     //Sign in with google
     Route::get('/auth/google', [\App\Http\Controllers\Authentication\AuthenticationController::class, 'googleLogin'])->name('googleLogin');
@@ -34,12 +33,15 @@ Route::group(['middleware' => ['guest']], function () {
     Route::post('/register', [\App\Http\Controllers\Authentication\AuthenticationController::class, 'registerStore'])->name('registerStore');
 });
 
-Route::group(['middleware' => ['auth', 'roles'], ['roles' => ['Seller']]], function () {
+Route::group(['middleware' => ['auth', 'roles'], ['roles' => ['Seller']]], function (){
     //Dashboard
     Route::get('/', [App\Http\Controllers\Dasboard\DasboardController::class, 'index'])->name('home');
     Route::get('/dashboard', [App\Http\Controllers\Dasboard\DasboardController::class, 'index'])->name('dashboard');
 
     //My Profile
-    Route::get('/profile/{page?}', [App\Http\Controllers\User\UserController::class, 'myProfile'])->name('myProfile');
-    Route::post('/profile/update', [App\Http\Controllers\User\UserController::class, 'updateProfile'])->name('updateProfile');
+    Route::get('/profile', [App\Http\Controllers\User\UserController::class, 'myProfile'])->name('myProfile');
+    Route::post('/profile', [App\Http\Controllers\User\UserController::class, 'updateProfile'])->name('updateProfile');
+    //Change Password
+    Route::get('/change-password', [App\Http\Controllers\User\UserController::class, 'changePassword'])->name('changePassword');
 });
+

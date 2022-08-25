@@ -12,8 +12,6 @@
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "sass": "^1.32.11",
-        "vite": "^3.0.0",
-        "@prettier/plugin-php": "0.14.3",
-        "prettier": "2.0.5"
+        "vite": "^3.0.0"
     }
 }

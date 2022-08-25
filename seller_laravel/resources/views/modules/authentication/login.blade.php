@@ -53,14 +53,14 @@
                         <div class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
                             <!--begin::Nav-->
                             <ul class="navi navi-hover py-4">
-                            @foreach(Config::get('languages') as $lang => $language)
-                                @if($language != Config::get('languages')[App::getLocale()])
-                                    <!--begin::Item-->
+                                @foreach(Config::get('languages') as $lang => $language)
+                                    @if($language != Config::get('languages')[App::getLocale()])
+                                        <!--begin::Item-->
                                         <li class="navi-item">
                                             <a href="{{ route('switchLanguage', $lang) }}" class="navi-link">
-                                    <span class="symbol symbol-20 mr-3">
-                                        <img class="h-20px w-20px rounded-sm mr-1" src="{{ asset('assets/media/svg/flags/086-nigeria.svg') }}" alt=""/>
-                                    </span>
+                                                <span class="symbol symbol-20 mr-3">
+                                                    <img class="h-20px w-20px rounded-sm mr-1" src="{{ asset('assets/media/svg/flags/086-nigeria.svg') }}" alt=""/>
+                                                </span>
                                                 <span class="navi-text">{{ $language }}</span>
                                             </a>
                                         </li>

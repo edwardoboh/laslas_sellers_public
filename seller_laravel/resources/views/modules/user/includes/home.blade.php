@@ -2,21 +2,21 @@
 <div class="flex-row-fluid ml-lg-8">
     <!--begin::Form-->
     <form class="form" action="{{ url(route('updateProfile')) }}" method="POST">
-        {{ csrf_field() }}
+    {{ csrf_field() }}
     <!--begin::Card-->
-    <div class="card card-custom card-stretch">
-        <!--begin::Header-->
-        <div class="card-header py-3">
-            <div class="card-title align-items-start flex-column">
-                <h3 class="card-label font-weight-bolder text-dark">Personal Information</h3>
-                <span class="text-muted font-weight-bold font-size-sm mt-1">Update your personal informaiton</span>
+        <div class="card card-custom card-stretch">
+            <!--begin::Header-->
+            <div class="card-header py-3">
+                <div class="card-title align-items-start flex-column">
+                    <h3 class="card-label font-weight-bolder text-dark">Personal Information</h3>
+                    <span class="text-muted font-weight-bold font-size-sm mt-1">Update your personal informaiton</span>
+                </div>
+                <div class="card-toolbar">
+                    <button type="submit" class="btn btn-success mr-2">Save Changes</button>
+                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                </div>
             </div>
-            <div class="card-toolbar">
-                <button type="submit" class="btn btn-success mr-2">Save Changes</button>
-                <button type="reset" class="btn btn-secondary">Cancel</button>
-            </div>
-        </div>
-        <!--end::Header-->
+            <!--end::Header-->
 
             <!--begin::Body-->
             <div class="card-body">
@@ -30,7 +30,7 @@
                     <label class="col-xl-3 col-lg-3 col-form-label">Avatar</label>
                     <div class="col-lg-9 col-xl-6">
                         <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-image: url(assets/media/users/blank.png)">
-                            <div class="image-input-wrapper" style="background-image: url('{{ $profile->profile_picture }}')"></div>
+                            <div class="image-input-wrapper" style="background-image: url('{{ $profile->profile_picture['file_secure_path'] }}')"></div>
 
                             <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                 <i class="fa fa-pen icon-sm text-muted"></i>
@@ -89,7 +89,7 @@
                         </select>
                     </div>
                 </div>
-                
+
                 {{-- Contact Info Section --}}
                 <div class="row">
                     <label class="col-xl-3"></label>
@@ -130,7 +130,7 @@
                     <label class="col-xl-3 col-lg-3 col-form-label">Country</label>
                     <div class="col-lg-9 col-xl-6">
                         <select name="country" class="form-control form-control-solid" id="kt_datatable_search_type">
-                            <option> {{ $profile->country->name }} </option>
+                            <option> {{ $profile->country['name'] }} </option>
                             @foreach ($countries as $country)
                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
                             @endforeach
@@ -143,7 +143,7 @@
                     <label class="col-xl-3 col-lg-3 col-form-label">State</label>
                     <div class="col-lg-9 col-xl-6">
                         <select name="state" class="form-control form-control-solid" id="kt_datatable_search_type">
-                            <option value="">{{ $profile->state->name }}</option>
+                            <option value="">{{ $profile->state['name'] }}</option>
                         </select>
                     </div>
                 </div>
@@ -153,7 +153,7 @@
                     <label class="col-xl-3 col-lg-3 col-form-label">LGA</label>
                     <div class="col-lg-9 col-xl-6">
                         <select name="lga" class="form-control form-control-solid" id="kt_datatable_search_type">
-                            <option value="">{{ $profile->lga->name }}</option>
+                            <option value="">{{ $profile->lga['name'] }}</option>
                         </select>
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                     <label class="col-xl-3 col-lg-3 col-form-label">Ward</label>
                     <div class="col-lg-9 col-xl-6">
                         <select name="ward" class="form-control form-control-solid" id="kt_datatable_search_type">
-                            <option value="">{{ $profile->ward->name }}</option>
+                            <option value="">{{ $profile->ward['name'] }}</option>
                         </select>
                     </div>
                 </div>
@@ -228,11 +228,12 @@
                 </div>
             </div>
             <!--end::Body-->
-        </form>
-        <!--end::Form-->
-    </div>
+    </form>
+    <!--end::Form-->
+</div>
 </div>
 <!--end::Content-->
-
 <!--Script to load State and LGA from Country-->
 @includeif('modules.user.includes.js.fetch')
+
+

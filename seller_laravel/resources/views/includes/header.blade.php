@@ -7,7 +7,7 @@
                 <!--begin::Header Nav-->
                 <ul class="menu-nav ">
                     <li class="menu-item  menu-item-submenu menu-item-rel menu-item-active">
-                        <h4>{{__('messages.welcome', ['name' => \App\Models\UserManagement\User::getUserFullName()])}}</h4>
+                        <h4>{{__('messages.welcome', ['name' => __('words.'.$user->title).' '.$userFullName])}}</h4>
                     </li>
                 </ul>
                 <!--end::Header Nav-->

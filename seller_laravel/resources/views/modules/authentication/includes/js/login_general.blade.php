@@ -55,7 +55,6 @@
 
             $('#kt_login_signin_submit').on('click', function (e) {
                 e.preventDefault();
-
                 validation.validate().then(function(status) {
                     if (status == 'Valid') {
                         KTApp.blockPage({
@@ -104,7 +103,7 @@
                                     data: {
                                         'session_function': 'put',
                                         'session_name': 'accessToken',
-                                        'session_value': data.data.access_token,
+                                        'session_value': JSON.stringify(data.data.access_token),
                                         '_token':'{{ csrf_token() }}',
                                     },
                                     type: 'post',
@@ -158,11 +157,9 @@
             // Handle oneTime button
             $('#kt_login_oneTime').on('click', function (e) {
                 e.preventDefault();
-
                 var onetimeEmail = localStorage.getItem('onetimeEmail');
                 var waitTime = localStorage.getItem('waitTime');
                 document.getElementById("kt_login_oneTime_email").value = onetimeEmail;
-
                 if (waitTime && onetimeEmail){
                     // Set the date we're counting down to
                     var countDownDate = new Date(waitTime).getTime();
@@ -413,6 +410,11 @@
 
     // Class Initialization
     jQuery(document).ready(function() {
+        document.getElementById('password').onkeydown = function(e){
+            if(e.keyCode === 13){
+                document.getElementById('kt_login_signin_submit').click();
+            }
+        };
         document.getElementById("resendOTP").style.display = 'none';
         KTLogin.init();
     });
@@ -438,7 +440,7 @@
                     data: {
                         'session_function': 'put',
                         'session_name': 'userDetails',
-                        'session_value': data_1.data,
+                        'session_value': JSON.stringify(data_1.data),
                         '_token':'{{ csrf_token() }}',
                     },
                     type: 'post',
@@ -501,7 +503,7 @@
                     data: {
                         'session_function': 'put',
                         'session_name': 'userRoles',
-                        'session_value': data_1.data,
+                        'session_value': JSON.stringify(data_1.data),
                         '_token':'{{ csrf_token() }}',
                     },
                     type: 'post',
@@ -521,7 +523,7 @@
                         window.location = "/signin";
                     }, 2000);
                 }, 2000);
-            } else if (data.status && data.status !== 200) {
+            } else if (data_1.status && data_1.status !== 200) {
                 KTApp.unblockPage();
                 toastr.error(data.message);
                 swal.fire({

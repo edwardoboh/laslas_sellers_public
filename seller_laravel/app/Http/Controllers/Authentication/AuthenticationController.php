@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Authentication;
 
-use App\Jobs\getCountries;
 use App\Services\ApiCallServices;
 use App\Services\TokenService;
 use Exception;
@@ -16,8 +15,8 @@ class AuthenticationController
     //Login
     public function login(Request $request)
     {
-        $page_title = 'Seller\'s Login';
-        $page_description = 'Login into the LasLas Seller\'s Platform.';
+        $page_title = __('messages.seller_login');
+        $page_description = __('messages.login_to_your_laslas_seller_');
         return view('modules.authentication.login', compact('page_title', 'page_description'));
     }
 
@@ -28,24 +27,6 @@ class AuthenticationController
             return redirect()->route('home')->cookie($cookie);
         } else {
             return redirect('login');
-        }
-    }
-
-    // Onetime Login
-    public function resetPasswordOnetimeLogin(Request $request)
-    {
-        //Send API request to this register user
-        $response = ApiCallServices::postWithBaseCurl(config("app.api_auth_url"),'forgot-password-onetime-login', $request->all());
-        if (!empty($response->status) && $response->status == 200) {
-            return $response;
-        } elseif (!empty($response->status) && $response->status != 200){
-            Session::flash('failed', $response->message);
-            Session::flash('failed_toastr', $response->message);
-            return back();
-        } else {
-            Session::flash('failed', 'Failed! No response found. Please try again.');
-            Session::flash('failed_toastr', 'Failed! No response found. Please try again.');
-            return back();
         }
     }
 
@@ -60,8 +41,8 @@ class AuthenticationController
             Session::flash('failed_toastr', $response->message);
             return back();
         } else {
-            Session::flash('failed', 'Failed! No response found. Please try again.');
-            Session::flash('failed_toastr', 'Failed! No response found. Please try again.');
+            Session::flash('failed', __('messages.failed_no_response_found'));
+            Session::flash('failed_toastr', __('messages.failed_no_response_found'));
             return back();
         }
     }
@@ -90,53 +71,10 @@ class AuthenticationController
             Session::flash('failed_toastr', $response->message);
             return redirect('/login');
         } else {
-            Session::flash('failed', 'Failed! No response found. Please try again.');
-            Session::flash('failed_toastr', 'Failed! No response found. Please try again.');
+            Session::flash('failed', __('messages.failed_no_response_found'));
+            Session::flash('failed_toastr', __('messages.failed_no_response_found'));
             return redirect('/login');
         }
-    }
-
-    //Login
-    public function saveUserLoginSessions($user)
-    {
-        //Save Token to session
-        Session::put('accessToken', $user->access_token);
-
-        //Send API request to get user's details
-        $parameters = [
-            'accessToken' => $user->access_token,
-        ];
-        $response = ApiCallServices::getWithBaseCurl(config("app.api_user_manager_url"),'users/'.$user->id, $parameters);
-        if (!empty($response->status) && $response->status == 200) {
-            Session::put('userDetails', $response->data);
-        } elseif (!empty($response->status) && $response->status != 200){
-            Session::flash('failed', $response->message);
-            Session::flash('failed_toastr', $response->message);
-            return back();
-        } else {
-            Session::flash('failed', 'Failed! No response found. Please try again.');
-            Session::flash('failed_toastr', 'Failed! No response found. Please try again.');
-            return back();
-        }
-
-        //Send API request to get user's roles
-        $parameters = [
-            'accessToken' => $user->access_token,
-        ];
-        $response1 = ApiCallServices::postWithBaseCurl(config("app.api_authorization_url"),'get-user-roles/'.$user->id, $parameters);
-        if (!empty($response1->status) && $response1->status == 200) {
-            Session::put('userRoles', $response1->data);
-        } elseif (!empty($response1->status) && $response1->status != 200){
-            Session::flash('failed', $response1->message);
-            Session::flash('failed_toastr', $response1->message);
-            return back();
-        } else {
-            Session::flash('failed', 'Failed! No response found. Please try again.');
-            Session::flash('failed_toastr', 'Failed! No response found. Please try again.');
-            return back();
-        }
-
-        return redirect('signin');
     }
 
     //Register
@@ -181,29 +119,59 @@ class AuthenticationController
         //Send API request
         $response = ApiCallServices::postWithBaseCurl(config("app.api_user_manager_url"),'users/register', $request->all());
         if (!empty($response->status) && $response->status == 200) {
-            //Get User Role
-            $roles = [];
-            $parameters = [
-                'accessToken' => $response->data->access_token
-            ];
-            $userRole = ApiCallServices::postWithBaseCurl(config("app.api_authorization_url"),'get-user-roles/'. $response->data->id, $parameters);
-            if (!empty($userRole->status) && $userRole->status == 200){
-                $roles = $userRole->data;
-            }
-            //create token cookie & sessions
-            Session::put('user', ['user_details'=>$response->data, 'roles'=>$roles]);
-            Session::put('accessToken', 'Bearer '.$response->data->access_token);
-            $cookie = cookie('accessToken', "Bearer ".$response->data->access_token);
-            return redirect()->route('home')->cookie($cookie);
+            return $this->saveUserLoginSessions($response->data);
         } elseif (!empty($response->status) && $response->status != 200){
             Session::flash('failed', $response->message);
             Session::flash('failed_toastr', $response->message);
             return back();
         } else {
-            Session::flash('failed', 'Failed! No response found. Please try again.');
-            Session::flash('failed_toastr', 'Failed! No response found. Please try again.');
+            Session::flash('failed', __('messages.failed_no_response_found'));
+            Session::flash('failed_toastr', __('messages.failed_no_response_found'));
             return back();
         }
+    }
+
+    //Save User Login Sessions
+    public function saveUserLoginSessions($user)
+    {
+        //Save Token to session
+        Session::put('accessToken', $user->access_token);
+
+        //Send API request to get user's details
+        $parameters = [
+            'accessToken' => $user->access_token,
+        ];
+        $response = ApiCallServices::getWithBaseCurl(config("app.api_user_manager_url"),'users/'.$user->id, $parameters);
+        if (!empty($response->status) && $response->status == 200) {
+            Session::put('userDetails', $response->data);
+        } elseif (!empty($response->status) && $response->status != 200){
+            Session::flash('failed', $response->message);
+            Session::flash('failed_toastr', $response->message);
+            return back();
+        } else {
+            Session::flash('failed', __('messages.failed_no_response_found'));
+            Session::flash('failed_toastr', __('messages.failed_no_response_found'));
+            return back();
+        }
+
+        //Send API request to get user's roles
+        $parameters = [
+            'accessToken' => $user->access_token,
+        ];
+        $response1 = ApiCallServices::postWithBaseCurl(config("app.api_authorization_url"),'get-user-roles/'.$user->id, $parameters);
+        if (!empty($response1->status) && $response1->status == 200) {
+            Session::put('userRoles', $response1->data);
+        } elseif (!empty($response1->status) && $response1->status != 200){
+            Session::flash('failed', $response1->message);
+            Session::flash('failed_toastr', $response1->message);
+            return back();
+        } else {
+            Session::flash('failed', __('messages.failed_no_response_found'));
+            Session::flash('failed_toastr', __('messages.failed_no_response_found'));
+            return back();
+        }
+
+        return redirect('signin');
     }
 
     public static function revokeSession()
@@ -247,11 +215,12 @@ class AuthenticationController
 
     public function saveToSession(Request $request)
     {
+
         if ($request->session_function == 'has'){
             Session::has($request->session_name);
         }
         if ($request->session_function == 'put'){
-            Session::put($request->session_name, $request->session_value);
+            Session::put($request->session_name, json_decode($request->session_value));
         }
         if ($request->session_function == 'forget'){
             Session::forget($request->session_name);

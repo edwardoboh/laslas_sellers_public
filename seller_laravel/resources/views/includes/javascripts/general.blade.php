@@ -3,7 +3,10 @@
     function getStates(country_id, state_id)
     {
         var country = document.getElementById(country_id).value;
-        var select = document.getElementById(state_id);
+        var state = document.getElementById(state_id);
+        $('#state_id option:not(:first)').remove();
+        $('#lga_id option:not(:first)').remove();
+        $('#ward_id option:not(:first)').remove();
 
         KTApp.blockPage({
             state: 'primary',
@@ -37,7 +40,7 @@
                     var el = document.createElement("option");
                     el.textContent = state_name;
                     el.value = state_id;
-                    select.appendChild(el);
+                    state.appendChild(el);
                 }
             },
         }).done(function(data){
@@ -50,6 +53,8 @@
     {
         var state = document.getElementById(state_id).value;
         var select = document.getElementById(lga_id);
+        $('#lga_id option:not(:first)').remove();
+        $('#ward_id option:not(:first)').remove();
 
         KTApp.blockPage({
             state: 'primary',
@@ -96,6 +101,7 @@
     {
         var lga = document.getElementById(lga_id).value;
         var select = document.getElementById(ward_id);
+        $('#ward_id option:not(:first)').remove();
 
         KTApp.blockPage({
             state: 'primary',

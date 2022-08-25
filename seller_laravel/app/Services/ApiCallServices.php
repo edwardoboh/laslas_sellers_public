@@ -1,10 +1,8 @@
 <?php
 namespace App\Services;
 
-use GuzzleHttp\Client;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Session;
 
 class ApiCallServices{
     public $request;
@@ -124,5 +122,37 @@ class ApiCallServices{
             return $res;
         }
 
+    }
+
+    //send PATCH API call With Guzzle with file attach
+    public static function postWithGuzzle($baseUrl, $url, $parameters, $files)
+    {
+        try {
+            $accessToken = TokenService::getAccessToken();
+            if (isset($parameters['accessToken'])){
+                $accessToken = $parameters['accessToken'];
+            }
+            $response = Http::withHeaders([
+                'Authorization' => $accessToken,
+                'Client-Id' => TokenService::getClientID(),
+            ]);
+            foreach ($files as $file){
+                if (!empty($file['file'])){
+                    $response = $response->attach($file['request_name'], file_get_contents($file['file']), $file['name']);
+                }
+            }
+            $response = $response->post($baseUrl.'/'.$url, $parameters);
+
+            $res = json_decode($response);
+
+            return $res;
+
+        } catch (ConnectionException $err) {
+            $response = [
+                'status' => 503,
+                'message' => $err->getMessage(),
+            ];
+            return (object)$response;
+        }
     }
 }

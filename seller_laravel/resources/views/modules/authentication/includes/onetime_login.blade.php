@@ -1,8 +1,7 @@
 <!--begin::Forgot-->
 <div class="login-form login-oneTime">
     <!--begin::Form-->
-    <form class="form" novalidate="novalidate" id="kt_login_oneTime_form" action="{{ url('reset-password-onetime-login') }}" method="post">
-        @csrf
+    <form class="form" novalidate="novalidate" id="kt_login_oneTime_form" action="#" method="get">
         <!--begin::Title-->
         <div class="text-center pb-8">
             <h2 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">{{ __('messages.one_time_login') }}</h2>
